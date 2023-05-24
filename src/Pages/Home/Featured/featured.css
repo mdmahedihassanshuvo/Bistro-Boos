@@ -1,0 +1,7 @@
+.featured-item{
+    background-image: url(../../../assets/home/featured.jpg), url(../../../assets/home/blend.png);
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
