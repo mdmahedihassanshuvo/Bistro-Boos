@@ -27,6 +27,7 @@ const Category = () => {
                 pagination={{
                   clickable: true,
                 }}
+                autoplay={true}
                 modules={[Pagination]}
                 className="mySwiper lg:mb-[90px]"
             >

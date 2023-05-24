@@ -1,14 +1,86 @@
 import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
 
 const Header = () => {
 
     const navItems = <>
-        <li>home</li>
+        <li>
+            <NavLink
+                to={'/'}
+                className={({ isActive }) =>
+                    isActive
+                        ? "border-b-4 border-accent"
+                        : "hover:border-b-4 hover:border-accent"
+                }
+            >
+                HOME
+            </NavLink>
+        </li>
+        <li>
+            <NavLink
+                to={'/contact'}
+                className={({ isActive }) =>
+                    isActive
+                        ? "active"
+                        : "hover:border-b-4 hover:border-accent"
+                }
+            >
+                CONTACT US
+            </NavLink>
+        </li>
+        <li>
+            <NavLink
+                to={'/dashboard'}
+                className={({ isActive }) =>
+                    isActive
+                        ? "active"
+                        : "hover:border-b-4 hover:border-accent"
+                }
+            >
+                DASHBOARD
+            </NavLink>
+        </li>
+        <li>
+            <NavLink
+                to={'/menu'}
+                className={({ isActive }) =>
+                    isActive
+                        ? "active"
+                        : "hover:border-b-4 hover:border-accent"
+                }
+            >
+                OUR MENU
+            </NavLink>
+        </li>
+        <li>
+            <NavLink
+                to={'/shop'}
+                className={({ isActive }) =>
+                    isActive
+                        ? "active"
+                        : "hover:border-b-4 hover:border-accent"
+                }
+            >
+                OUR SHOP
+            </NavLink>
+        </li>
+        <li>
+            <NavLink
+                to={'/login'}
+                className={({ isActive }) =>
+                    isActive
+                        ? "active"
+                        : "hover:border-b-4 hover:border-accent"
+                }
+            >
+                LOGIN
+            </NavLink>
+        </li>
     </>
 
     return (
         <div className='text-white'>
-            <div className="navbar fixed z-20 bg-black bg-opacity-30 max-w-screen-xl">
+            <navbar className="navbar py-4 fixed z-20 bg-black bg-opacity-30 max-w-screen-xl">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -18,7 +90,7 @@ const Header = () => {
                             {navItems}
                         </ul>
                     </div>
-                    <a className="btn uppercase btn-ghost text-xl">Bistro Boss</a>
+                    <Link className="flex flex-col items-center uppercase"><span className='text-xl'>Bistro Boss</span> <span className='text-sm tracking-widest'>Restaurant</span></Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -28,7 +100,7 @@ const Header = () => {
                 <div className="navbar-end">
                     <a className="btn">Get started</a>
                 </div>
-            </div>
+            </navbar>
         </div>
     );
 };
