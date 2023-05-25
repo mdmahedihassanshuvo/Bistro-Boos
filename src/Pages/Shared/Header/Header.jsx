@@ -54,14 +54,14 @@ const Header = () => {
         </li>
         <li>
             <NavLink
-                to={'/shop'}
+                to={`/order/${'dessert'}`}
                 className={({ isActive }) =>
                     isActive
                         ? "active"
                         : "hover:border-b-4 hover:border-accent"
                 }
             >
-                OUR SHOP
+                ORDER FOOD
             </NavLink>
         </li>
         <li>

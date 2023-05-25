@@ -21,7 +21,7 @@ const Featured = () => {
                     <p>{moment().format("MMM D, YYYY")}</p>
                     <p className='font-medium'>WHERE CAN I GET SOME?</p>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error voluptate facere, deserunt dolores maiores quod nobis quas quasi. Eaque repellat recusandae ad laudantium tempore consequatur consequuntur omnis ullam maxime tenetur.</p>
-                    <button className="btn btn-outline border-0 border-b-4 border-white text-white lg:mt-5">Button</button>
+                    <button className="btn btn-outline border-0 border-b-4 border-white text-white lg:mt-5">Order Now</button>
                 </div>
             </div>
         </div>
