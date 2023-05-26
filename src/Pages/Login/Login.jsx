@@ -37,6 +37,7 @@ const Login = () => {
                     timer: 1500
                 })
                 navigate(from, { replace: true })
+                form.reset();
             })
             .catch(error => console.log(error))
     }
