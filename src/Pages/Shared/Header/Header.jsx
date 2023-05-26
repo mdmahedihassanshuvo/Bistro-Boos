@@ -48,18 +48,6 @@ const Header = () => {
         </li>
         <li>
             <NavLink
-                to={'/dashboard'}
-                className={({ isActive }) =>
-                    isActive
-                        ? "active"
-                        : "hover:border-b-4 hover:border-accent"
-                }
-            >
-                DASHBOARD
-            </NavLink>
-        </li>
-        <li>
-            <NavLink
                 to={'/menu'}
                 className={({ isActive }) =>
                     isActive

@@ -11,7 +11,7 @@ import { FaGoogle } from 'react-icons/fa';
 const SignUp = () => {
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const { createUser, updateUserProfile } = useContext(AuthContext)
+    const { createUser, updateUserProfile, sendVerification } = useContext(AuthContext)
     const location = useLocation()
     console.log(location)
     const navigate = useNavigate()
@@ -24,17 +24,21 @@ const SignUp = () => {
                 // console.log(user);
 
                 updateUserProfile(data.name, data.photo)
+                    .then(() => console.log('profile updated successfully'))
+                    .catch(error => console.log(error))
+                sendVerification()
                     .then(() => {
                         Swal.fire({
                             position: 'center',
                             icon: 'success',
-                            title: 'Sign Up successfully',
+                            title: 'Send Verification code to your account',
                             showConfirmButton: false,
                             timer: 1500
                         })
                         reset()
                     })
             })
+            .catch(error => console.log(error));
         navigate(from, { replace: true })
     }
 

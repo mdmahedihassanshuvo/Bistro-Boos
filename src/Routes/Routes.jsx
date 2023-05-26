@@ -8,6 +8,7 @@ import OrderFood from "../Pages/OrderFood/OrderFood";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
+import ContactUs from "../Pages/ContactUs/ContactUs";
 
 const router = createBrowserRouter([
     {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
             {
                 path: '/register',
                 element: <SignUp />
+            },
+            {
+                path: '/contact',
+                element: <PrivateRoute><ContactUs/></PrivateRoute>
             }
         ]
     },
