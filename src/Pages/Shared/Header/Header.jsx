@@ -1,7 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../../../Provider/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Header = () => {
+
+    const { user, logout } = useContext(AuthContext)
+
+    const handleLogout = () => {
+        logout()
+            .then(() => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Logout Successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            })
+            .catch(error => console.log(error))
+    }
 
     const navItems = <>
         <li>
@@ -64,7 +82,7 @@ const Header = () => {
                 ORDER FOOD
             </NavLink>
         </li>
-        <li>
+        {!user ? <li>
             <NavLink
                 to={'/login'}
                 className={({ isActive }) =>
@@ -75,7 +93,15 @@ const Header = () => {
             >
                 LOGIN
             </NavLink>
-        </li>
+        </li> :
+            <>
+                <button onClick={handleLogout} className="btn btn-ghost mr-2">LOGOUT</button>
+                <div className="avatar">
+                    <div className="w-12 rounded-full">
+                        <img title={user?.displayName} src={user?.photoURL} />
+                    </div>
+                </div>
+            </>}
     </>
 
     return (
@@ -92,13 +118,10 @@ const Header = () => {
                     </div>
                     <Link className="flex flex-col items-center uppercase"><span className='text-xl'>Bistro Boss</span> <span className='text-sm tracking-widest'>Restaurant</span></Link>
                 </div>
-                <div className="navbar-center hidden lg:flex">
+                <div className="navbar-center hidden lg:flex lg:mr-5">
                     <ul className="menu menu-horizontal px-1">
                         {navItems}
                     </ul>
-                </div>
-                <div className="navbar-end">
-                    <a className="btn">Get started</a>
                 </div>
             </navbar>
         </div>
