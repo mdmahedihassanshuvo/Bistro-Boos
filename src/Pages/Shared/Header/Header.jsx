@@ -2,10 +2,13 @@ import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
+import { FaShoppingCart } from 'react-icons/fa';
+import UseCart from '../../../Hooks/UseCart';
 
 const Header = () => {
 
     const { user, logout } = useContext(AuthContext)
+    const [cart] = UseCart()
 
     const handleLogout = () => {
         logout()
@@ -17,6 +20,7 @@ const Header = () => {
                     showConfirmButton: false,
                     timer: 1500
                 })
+                localStorage.removeItem('accessToken')
             })
             .catch(error => console.log(error))
     }
@@ -48,7 +52,7 @@ const Header = () => {
         </li>
         <li>
             <NavLink
-                to={'/menu'}
+                to='/menu'
                 className={({ isActive }) =>
                     isActive
                         ? "active"
@@ -69,6 +73,14 @@ const Header = () => {
             >
                 ORDER FOOD
             </NavLink>
+        </li>
+        <li>
+            <Link to='/dashboard/myCart'>
+                <button className="flex gap-2">
+                    <FaShoppingCart></FaShoppingCart>
+                    <div className="badge badge-secondary">{cart?.length || '0'}</div>
+                </button>
+            </Link>
         </li>
         {!user ? <li>
             <NavLink

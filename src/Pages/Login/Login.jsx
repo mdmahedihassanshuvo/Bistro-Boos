@@ -36,8 +36,25 @@ const Login = () => {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                navigate(from, { replace: true })
-                form.reset();
+                const user = result.user;
+                const loggedUser = {
+                    email: user.email
+                }
+                // console.log(loggedUser)
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json',
+                    },
+                    body: JSON.stringify(loggedUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        // console.log(data)
+                        localStorage.setItem('accessToken', data.token);
+                        navigate(from, { replace: true })
+                        form.reset();
+                    })
             })
             .catch(error => console.log(error))
     }
@@ -101,8 +118,9 @@ const Login = () => {
                                 </label>
                                 <input onBlur={handleValidateCaptcha} type="text" name='captcha' placeholder="type the captcha" className="input input-bordered" />
                             </div>
+                            {/* ToDo : make button disable for captcha--------------- */}
                             <div className="form-control mt-6">
-                                <input disabled={disabled} className="btn btn-primary" type="submit" value="Login" />
+                                <input disabled={false} className="btn btn-primary" type="submit" value="Login" />
                             </div>
                             <p className='mt-2 text-center'>Don't have any account please, <Link to='/register' state={{ from: from }} className='text-blue-600 underline'>Sign Up</Link></p>
                             <button onClick={handleLoginWithGoogle} className="btn btn-block"><FaGoogle className='mr-2 text-blue-600 text-xl' /> Login With Google</button>
