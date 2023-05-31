@@ -7,13 +7,14 @@ import { Helmet } from 'react-helmet-async';
 import { AuthContext } from '../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
 import { FaGoogle } from 'react-icons/fa';
+import LoginWithSocial from '../Shared/SocialLogin/LoginWithSocial';
 
 const Login = () => {
 
     const [disabled, setDisabled] = useState(true)
     const { loginUser, user, loginWithGoogle } = useContext(AuthContext)
     const location = useLocation()
-    console.log(location)
+    // console.log(location)
     const navigate = useNavigate()
     const from = location?.state?.from?.pathname || '/'
 
@@ -70,21 +71,6 @@ const Login = () => {
         }
     }
 
-    const handleLoginWithGoogle = () => {
-        loginWithGoogle()
-            .then(() => {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'User login successfully',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-                navigate(from, { replace: true })
-            })
-            .catch(error => console.log(error))
-    }
-
     return (
         <>
             <Helmet>
@@ -120,10 +106,10 @@ const Login = () => {
                             </div>
                             {/* ToDo : make button disable for captcha--------------- */}
                             <div className="form-control mt-6">
-                                <input disabled={false} className="btn btn-primary" type="submit" value="Login" />
+                                <input disabled={disabled} className="btn btn-primary" type="submit" value="Login" />
                             </div>
                             <p className='mt-2 text-center'>Don't have any account please, <Link to='/register' state={{ from: from }} className='text-blue-600 underline'>Sign Up</Link></p>
-                            <button onClick={handleLoginWithGoogle} className="btn btn-block"><FaGoogle className='mr-2 text-blue-600 text-xl' /> Login With Google</button>
+                            <LoginWithSocial/>
                         </form>
                     </div>
                 </div>

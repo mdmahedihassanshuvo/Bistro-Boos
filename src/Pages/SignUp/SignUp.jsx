@@ -7,13 +7,14 @@ import { AuthContext } from '../../Provider/AuthProvider';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
 import { FaGoogle } from 'react-icons/fa';
+import LoginWithSocial from '../Shared/SocialLogin/LoginWithSocial';
 
 const SignUp = () => {
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const { createUser, updateUserProfile, sendVerification } = useContext(AuthContext)
     const location = useLocation()
-    console.log(location)
+    // console.log(location)
     const navigate = useNavigate()
     const from = location?.state?.from || '/'
     const onSubmit = data => {
@@ -21,41 +22,36 @@ const SignUp = () => {
         createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
-                // console.log(user);
-
                 updateUserProfile(data.name, data.photo)
-                    .then(() => console.log('profile updated successfully'))
-                    .catch(error => console.log(error))
-                sendVerification()
                     .then(() => {
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            title: 'Send Verification code to your account',
-                            showConfirmButton: false,
-                            timer: 1500
+                        const savedUser = { name: data.name, email: data.email }
+                        fetch('http://localhost:5000/users', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json',
+                            },
+                            body: JSON.stringify(savedUser)
                         })
-                        reset()
+                            .then(res => res.json())
+                            .then(data => {
+                                // console.log(data);
+                                if (data.insertedId) {
+                                    reset();
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'success',
+                                        title: 'Sign Up successfully',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                    navigate(from, { replace: true })
+                                }
+                            })
                     })
-                const loggedUser = {
-                    email: user.email
-                }
-                fetch('http://localhost:5000/jwt', {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json',
-                    },
-                    body: JSON.stringify(loggedUser)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        // console.log(data)
-                        localStorage.setItem('accessToken', data.token);
-                        navigate(from, { replace: true })
-                    })
+                    .catch(error => console.log(error))
             })
             .catch(error => console.log(error));
-        // navigate(from, { replace: true })
+
     }
 
     return (
@@ -104,6 +100,7 @@ const SignUp = () => {
                                 <input className="btn btn-primary" type="submit" value="Sign Up" />
                             </div>
                             <p className='mt-2 text-center'>Already have an account please, <Link to='/login' className='text-blue-600 underline'>Login</Link></p>
+                            <LoginWithSocial/>
                         </form>
                     </div>
                 </div>
@@ -113,3 +110,28 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
+// const loggedUser = {
+//     email: user.email
+// }
+// fetch('http://localhost:5000/jwt', {
+//     method: 'POST',
+//     headers: {
+//         'content-type': 'application/json',
+//     },
+//     body: JSON.stringify(loggedUser)
+// })
+//     .then(res => res.json())
+//     .then(data => {
+//         // console.log(data)
+//         localStorage.setItem('accessToken', data.token);
+//         navigate(from, { replace: true })
+//     })
+
+
+
+// sendVerification()
+//     .then(() => {
+
+//         reset()
+//     })

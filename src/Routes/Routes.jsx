@@ -11,6 +11,7 @@ import ContactUs from "../Pages/ContactUs/ContactUs";
 import Dashboard from "../Layout/Dashboard";
 import MyCart from "../Pages/Dashboard/MyCart";
 import Main from "../Layout/Main";
+import AllUsers from "../Pages/Dashboard/AllUsers";
 
 
 const router = createBrowserRouter([
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
             {
                 path: 'myCart',
                 element: <MyCart/>
+            },
+            {
+                path: 'allusers',
+                element: <AllUsers/>
             }
         ]
     }
