@@ -37,25 +37,28 @@ const Login = () => {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                const user = result.user;
-                const loggedUser = {
-                    email: user.email
-                }
-                // console.log(loggedUser)
-                fetch('http://localhost:5000/jwt', {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json',
-                    },
-                    body: JSON.stringify(loggedUser)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        // console.log(data)
-                        localStorage.setItem('accessToken', data.token);
-                        navigate(from, { replace: true })
-                        form.reset();
-                    })
+                navigate(from, { replace: true })
+                form.reset();
+
+                // Do this in a specific place ( AuthProvider )--------------------------------------------------------
+
+                // const user = result.user;
+                // const loggedUser = {
+                //     email: user.email
+                // }
+                // // console.log(loggedUser)
+                // fetch('http://localhost:5000/jwt', {
+                //     method: 'POST',
+                //     headers: {
+                //         'content-type': 'application/json',
+                //     },
+                //     body: JSON.stringify(loggedUser)
+                // })
+                //     .then(res => res.json())
+                //     .then(data => {
+                //         // console.log(data)
+                //         localStorage.setItem('accessToken', data.token);
+                //     })
             })
             .catch(error => console.log(error))
     }

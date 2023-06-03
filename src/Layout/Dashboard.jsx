@@ -17,7 +17,7 @@ const Dashboard = () => {
         <div>
             <div className="drawer drawer-mobile">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content flex flex-col items-center justify-center">
+                <div className="drawer-content">
                     <Outlet />
                     <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
 
@@ -31,10 +31,10 @@ const Dashboard = () => {
                                 <NavLink to='/dashboard/home'><FaHome />ADMIN HOME</NavLink>
                             </li>
                             <li>
-                                <NavLink to='/dashboard/reservation'><FaUtensils />ADD ITEMS</NavLink>
+                                <NavLink to='/dashboard/additem'><FaUtensils />ADD ITEMS</NavLink>
                             </li>
                             <li>
-                                <NavLink to='/dashboard/history'><FaBars />MANAGE ITEMS</NavLink>
+                                <NavLink to='/dashboard/manageitems'><FaBars />MANAGE ITEMS</NavLink>
                             </li>
                             <li>
                                 <NavLink to='/dashboard/history'><FaBook />MANAGE BOOKINGS</NavLink>
