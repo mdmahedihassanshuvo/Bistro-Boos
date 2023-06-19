@@ -4,11 +4,13 @@ import { AuthContext } from '../../../Provider/AuthProvider';
 import Swal from 'sweetalert2';
 import { FaShoppingCart } from 'react-icons/fa';
 import UseCart from '../../../Hooks/UseCart';
+import useAdmin from '../../../Hooks/useAdmin';
 
 const Header = () => {
 
     const { user, logout } = useContext(AuthContext)
-    const [cart] = UseCart()
+    const [cart] = UseCart();
+    const [isAdmin] = useAdmin()
 
     const handleLogout = () => {
         logout()
@@ -37,6 +39,9 @@ const Header = () => {
             >
                 HOME
             </NavLink>
+        </li>
+        <li>
+            <Link to={isAdmin ? '/dashboard/adminhome' : '/dashboard/userhome'}>Dashboard</Link>
         </li>
         <li>
             <NavLink
@@ -75,12 +80,10 @@ const Header = () => {
             </NavLink>
         </li>
         <li>
-            <Link to='/dashboard/myCart'>
-                <button className="flex gap-2">
-                    <FaShoppingCart></FaShoppingCart>
-                    <div className="badge badge-secondary">{cart?.length || '0'}</div>
-                </button>
-            </Link>
+            <button className="flex gap-2">
+                <FaShoppingCart></FaShoppingCart>
+                <div className="badge badge-secondary">{cart?.length || '0'}</div>
+            </button>
         </li>
         {!user ? <li>
             <NavLink
