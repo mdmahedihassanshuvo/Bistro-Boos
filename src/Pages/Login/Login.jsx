@@ -47,7 +47,7 @@ const Login = () => {
                 //     email: user.email
                 // }
                 // // console.log(loggedUser)
-                // fetch('http://localhost:5000/jwt', {
+                // fetch('https://bistro-boss-server-jade.vercel.app/jwt', {
                 //     method: 'POST',
                 //     headers: {
                 //         'content-type': 'application/json',
