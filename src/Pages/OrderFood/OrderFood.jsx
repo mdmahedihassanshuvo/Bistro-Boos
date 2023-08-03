@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 const OrderFood = () => {
 
     const categories = ["dessert", "pizza", "salad", "soup", "drinks"]
-    const {category} = useParams()
+    const { category } = useParams()
     const initialValue = categories.indexOf(category)
     const [tabIndex, setTabIndex] = useState(initialValue)
     const [menu] = useMenu()
@@ -36,27 +36,27 @@ const OrderFood = () => {
                     </TabList>
                     <TabPanel>
                         <OrderItem
-                        item={dessert}
+                            item={dessert}
                         />
                     </TabPanel>
                     <TabPanel>
                         <OrderItem
-                        item={pizza}
+                            item={pizza}
                         />
                     </TabPanel>
                     <TabPanel>
                         <OrderItem
-                        item={salad}
+                            item={salad}
                         />
                     </TabPanel>
                     <TabPanel>
                         <OrderItem
-                        item={soup}
+                            item={soup}
                         />
                     </TabPanel>
                     <TabPanel>
                         <OrderItem
-                        item={drinks}
+                            item={drinks}
                         />
                     </TabPanel>
                 </Tabs>
